@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpRequest
 
+from apps.robots.generate_excel_summary import generate_excel_summary
 from apps.robots.utils import process_data
 
 
@@ -28,3 +29,7 @@ def create_robot(request: HttpRequest) -> JsonResponse:
             return JsonResponse({"error": str(e)}, status=400)
     else:
         return JsonResponse({"error": "Method not supported."}, status=400)
+
+
+def download_excel_summary(request):
+    return generate_excel_summary(request)
